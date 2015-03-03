@@ -8,6 +8,7 @@
     "bcryptjs": "^2.1.0",
     "ejs": "~0.8.4",
     "grunt": "0.4.2",
+    "grunt-bower": "^0.17.0",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-coffee": "~0.10.1",
     "grunt-contrib-concat": "~0.3.0",
