@@ -69,7 +69,12 @@ var AuthController = {
    */
   logout: function (req, res) {
     req.logout();
-    res.redirect('/');
+    if(req.wantsJSON) {
+      res.jsonx({success: true, errors: []});
+    }
+    else {
+      res.redirect('/');
+    }
   },
 
   /**
@@ -141,13 +146,23 @@ var AuthController = {
 
       switch (action) {
         case 'register':
-          res.redirect('/register');
+          if(req.wantsJSON) {
+            res.jsonx({success: false, errors: [flashError || 'Error.Passport.Generic']});
+          }
+          else {
+            res.redirect('/register');
+          }
           break;
         case 'disconnect':
           res.redirect('back');
           break;
         default:
-          res.redirect('/login');
+          if(req.wantsJSON) {
+            res.jsonx({success: false, errors: [flashError || 'Error.Passport.Generic']});
+          }
+          else {
+            res.redirect('/login');
+          }
       }
     }
 
@@ -163,7 +178,12 @@ var AuthController = {
 
         // Upon successful login, send the user to the homepage were req.user
         // will available.
-        res.redirect('/');
+        if(req.wantsJSON) {
+          res.jsonx({success: true, errors: []});
+        }
+        else {
+          res.redirect('/');
+        }
       });
     });
   },
