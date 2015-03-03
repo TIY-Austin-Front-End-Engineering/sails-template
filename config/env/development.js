@@ -17,17 +17,8 @@ module.exports = {
 	* environment (see config/connections.js and config/models.js )           *
 	***************************************************************************/
 
-	// models: {
-	//   connection: 'someMongodbServer'
-	// }
 	models: {
-		postgres: {
-			adapter: 'sails-postgresql',
-			host: 'localhost',
-			user: 'postgres',
-			password: '',
-			database: 'appdb'
-		}
+	  connection: 'postgresDev'
 	}
 
 };
