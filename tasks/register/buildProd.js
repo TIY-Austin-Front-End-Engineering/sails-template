@@ -4,7 +4,12 @@ module.exports = function (grunt) {
 		'concat',
 		'uglify',
 		'cssmin',
-		'linkAssetsBuildProd',
+		'sails-linker:prodJs',
+		'sails-linker:prodStyles',
+		'sails-linker:devTpl',
+		'sails-linker:prodJsJade',
+		'sails-linker:prodStylesJade',
+		'sails-linker:devTplJade',
 		'clean:build',
 		'copy:build'
 	]);
