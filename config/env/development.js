@@ -20,14 +20,5 @@ module.exports = {
 	// models: {
 	//   connection: 'someMongodbServer'
 	// }
-	models: {
-		postgres: {
-			adapter: 'sails-postgresql',
-			host: 'localhost',
-			user: 'postgres',
-			password: '',
-			database: 'appdb'
-		}
-	}
 
 };
