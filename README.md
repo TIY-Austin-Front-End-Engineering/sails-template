@@ -2,6 +2,8 @@
 
 ![overview diagram](/development-heroku.jpg)
 
+## Setup
+
 ### 1. Install all of the necessary software
 
 > You will only ever need to do these steps once.
@@ -57,3 +59,30 @@
 
 1. Run `foerver stopall`.
 2. Type `ctrl+c` to quit out of any running logs.
+
+## Authentication API
+
+Built into this template is user authentication. Below are the api endpoints that are available to you:
+
+**/auth/user/register**
+
+Registers a new user in your app.
+
+Method: POST
+
+Parameters:
+
+ - username: string, required
+ - email: string, required (must be a valid email address)
+ - password: string, required (length greater than or equal to 8 characters)
+
+**/auth/user**
+
+Validates a users credentials and logs them in if they are correct.
+
+Method: POST
+
+Parameters:
+
+ - identifier: string, required
+ - password: string, required
