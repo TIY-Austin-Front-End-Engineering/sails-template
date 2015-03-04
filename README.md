@@ -52,3 +52,10 @@
 3. `git add .` and `git commit -m "message"`. Be sure to include all of the .tmp files in your commit.
 4. Run `git push heroku master`
 5. This is usually a good time to push to github too: `git push origin master`
+
+### 5. Shutting down your dev environment
+
+> Sails can slow down your computer, so when you're not doing dev work you'll want to shut downt he server.
+
+1. Run `foerver stopall`.
+2. Type `ctrl+c` to quit out of any running logs.
