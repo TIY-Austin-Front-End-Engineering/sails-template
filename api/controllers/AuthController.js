@@ -131,16 +131,18 @@ var AuthController = {
       // We do return a generic error and the original request body.
       var flashError = req.flash('error')[0];
 
-      console.log(err);
-      console.log(flashError);
-      console.log(req.session);
+      var errorToReturn = null;
 
       if (err && !flashError ) {
-        req.flash('error', 'Error.Passport.Generic');
+        errorToReturn = 'Error.Passport.Generic';
       } else if (flashError) {
-        req.flash('error', flashError);
+        errorToReturn = flashError;
       }
-      req.flash('form', req.body);
+
+      if(!req.wantsJSON) {
+        req.flash('error', errorToReturn);
+        req.flash('form', req.body);
+      }
 
       // If an error was thrown, redirect the user to the
       // login, register or disconnect action initiator view.
@@ -150,7 +152,7 @@ var AuthController = {
       switch (action) {
         case 'register':
           if(req.wantsJSON) {
-            res.jsonx({success: false, errors: [flashError || 'Error.Passport.Generic']});
+            res.jsonx({success: false, errors: [errorToReturn]});
           }
           else {
             res.redirect('/register');
@@ -161,7 +163,7 @@ var AuthController = {
           break;
         default:
           if(req.wantsJSON) {
-            res.jsonx({success: false, errors: [flashError || 'Error.Passport.Generic']});
+            res.jsonx({success: false, errors: [errorToReturn]});
           }
           else {
             res.redirect('/login');
