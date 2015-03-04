@@ -20,10 +20,5 @@ module.exports = {
 	// models: {
 	//   connection: 'someMongodbServer'
 	// }
-	paths: {
-		default: {
-			tmpdir: 'www'
-		}
-	}
 
 };
