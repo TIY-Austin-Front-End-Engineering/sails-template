@@ -133,6 +133,7 @@ var AuthController = {
 
       console.log(err);
       console.log(flashError);
+      console.log(req.session);
 
       if (err && !flashError ) {
         req.flash('error', 'Error.Passport.Generic');
@@ -170,12 +171,12 @@ var AuthController = {
 
     passport.callback(req, res, function (err, user) {
       if (err) {
-        return tryAgain();
+        return tryAgain(err);
       }
 
       req.login(user, function (err) {
         if (err) {
-          return tryAgain();
+          return tryAgain(err);
         }
 
         // Upon successful login, send the user to the homepage were req.user
