@@ -1,6 +1,6 @@
 # Full stack javascript Sails template
 
-![overview diagram](/day-33/development-heroku.jpg)
+![overview diagram](/development-heroku.jpg)
 
 ### 1. Install all of the necessary software
 
