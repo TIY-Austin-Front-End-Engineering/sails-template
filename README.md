@@ -64,7 +64,7 @@
 
 Built into this template is user authentication. Below are the api endpoints that are available to you:
 
-**/auth/user/register**
+**/auth/local/register**
 
 Registers a new user in your app.
 
@@ -76,9 +76,17 @@ Parameters:
  - email: string, required (must be a valid email address)
  - password: string, required (length greater than or equal to 8 characters)
 
+Returns an object with the following properties:
+
+ - success: boolean - true if the user was successfully registered, else false.
+ - errors: array - a list of error codes (if any) that were encountered.
+ - user: object - contains the newly registered user if registration was successfull.
+
+*Will return an error if the user is logged in. Only logged out users can register.*
+
 - - -
 
-**/auth/user**
+**/auth/local**
 
 Validates a users credentials and logs them in if they are correct.
 
@@ -88,3 +96,24 @@ Parameters:
 
  - identifier: string, required
  - password: string, required
+
+Returns an object with the following properties:
+
+ - success: boolean - true if the user was successfully logged in, else false.
+ - errors: array - a list of error codes (if any) that were encountered.
+ - user: object - contains the newly registered user if registration was successfull.
+
+- - - 
+
+**/logout**
+
+Logs a user out.
+
+Method: GET / POST
+
+Parameters: *none*
+
+Returns an object with the following properties:
+
+ - success: boolean - true if the user was successfully logged out, else false.
+ - errors: array - a list of error codes (if any) that were encountered.
