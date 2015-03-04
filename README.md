@@ -41,16 +41,14 @@
 1. On the command line make sure that you are inside of your project directory and your project has a github repo (aka you have typed `git init` or cloned it from GitHub)
 2. Run the command `heroku create` to create a new app on heroku. You may have to enter your heroku username and password.
 3. Run `heroku addons:add heroku-postgresql` to create a database on heroku for your app.
-4. Run `heroku config:set NODE_ENV=production` to set the environment variable to production.
+4. Run `heroku config:set NODE_ENV=heroku` to set the environment variable to heroku. This will cause the heroku server to use a slightly different server configuration.
 
 ### 4. Deploy to production
 
 > You will need to do these steps each time you have changes on your development environment that you want to deploy to production (aka heroku).
 
-1. **Stop your currently running sails server** by running `forever stopall`.
-2. Run `grunt buildProd` to prepare all of your files for production.
-3. `git add .` and `git commit -m "message"`. Be sure to include all of the .tmp files in your commit.
-4. Run `git push heroku master`
+1. `git add .` and `git commit -m "message"`. Be sure to include all of the .tmp files in your commit.
+4. Run `git push heroku master`. This will update your production server with all of the code you just committed.
 5. This is usually a good time to push to github too: `git push origin master`
 
 ### 5. Shutting down your dev environment
