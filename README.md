@@ -73,6 +73,7 @@ Built into this template is user authentication. Below are the api endpoints tha
 >  - email: string, required (must be a valid email address)
 >  - password: string, required (length greater than or equal to 8 characters)
 
+
 > **/auth/user**
 > Validates a users credentials and logs them in if they are correct.
 > Method: POST
