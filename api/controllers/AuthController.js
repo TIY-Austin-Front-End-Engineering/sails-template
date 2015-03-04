@@ -109,6 +109,22 @@ var AuthController = {
   },
 
   /**
+   * Returns the currently logged in user in JSON
+   *
+   * @param {Object} req
+   * @param {Object} res
+   */
+  user: function (req, res) {
+    if(req.user) {
+      res.jsonx(req.user);
+    }
+    else {
+      res.status(404);
+      res.jsonx({});
+    }
+  },
+
+  /**
    * Create a authentication callback endpoint
    *
    * This endpoint handles everything related to creating and verifying Pass-

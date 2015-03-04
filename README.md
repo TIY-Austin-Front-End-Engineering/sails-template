@@ -105,6 +105,18 @@ Returns an object with the following properties:
 
 - - - 
 
+**/auth/user**
+
+Gets the currently logged in user.
+
+Method: GET
+
+Parameters: *none*
+
+Returns an object with the properties of the currently logged in user, or an empty object with a 404 status code if there is no logged in user.
+
+- - - 
+
 **/logout**
 
 Logs a user out.
