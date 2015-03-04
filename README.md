@@ -65,11 +65,8 @@
 Built into this template is user authentication. Below are the api endpoints that are available to you:
 
 **/auth/user/register**
-
 Registers a new user in your app.
-
 Method: POST
-
 Parameters:
 
  - username: string, required
@@ -77,11 +74,8 @@ Parameters:
  - password: string, required (length greater than or equal to 8 characters)
 
 **/auth/user**
-
 Validates a users credentials and logs them in if they are correct.
-
 Method: POST
-
 Parameters:
 
  - identifier: string, required
