@@ -47,7 +47,8 @@
 
 > You will need to do these steps each time you have changes on your development environment that you want to deploy to production (aka heroku).
 
-1. Run `grunt buildProd` to prepare all of your files for production.
-2. Make sure you have added and committed all of the changes that you want to deploy.
-3. Run `git push heroku master`
-4. This is usually a good time to push to github too: `git push origin master`
+1. **Stop your currently running sails server** by running `forever stopall`.
+2. Run `grunt buildProd` to prepare all of your files for production.
+3. `git add .` and `git commit -m "message"`. Be sure to include all of the .tmp files in your commit.
+4. Run `git push heroku master`
+5. This is usually a good time to push to github too: `git push origin master`
