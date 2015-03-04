@@ -126,11 +126,13 @@ var AuthController = {
    */
   callback: function (req, res) {
     function tryAgain (err) {
-
       // Only certain error messages are returned via req.flash('error', someError)
       // because we shouldn't expose internal authorization errors to the user.
       // We do return a generic error and the original request body.
       var flashError = req.flash('error')[0];
+
+      console.log(err);
+      console.log(flashError);
 
       if (err && !flashError ) {
         req.flash('error', 'Error.Passport.Generic');
@@ -179,7 +181,7 @@ var AuthController = {
         // Upon successful login, send the user to the homepage were req.user
         // will available.
         if(req.wantsJSON) {
-          res.jsonx({success: true, errors: []});
+          res.jsonx({success: true, errors: [], redirect: '/', user: user});
         }
         else {
           res.redirect('/');
