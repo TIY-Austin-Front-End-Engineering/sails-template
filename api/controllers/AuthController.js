@@ -11,10 +11,10 @@ var AuthController = {
    *
    * The login form itself is just a simple HTML form:
    *
-      <form role="form" action="/auth/local" method="post">
-        <input type="text" name="identifier" placeholder="Username or Email">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Sign in</button>
+      <form role='form' action='/auth/local' method='post'>
+        <input type='text' name='identifier' placeholder='Username or Email'>
+        <input type='password' name='password' placeholder='Password'>
+        <button type='submit'>Sign in</button>
       </form>
    *
    * You could optionally add CSRF-protection as outlined in the documentation:
@@ -24,7 +24,7 @@ var AuthController = {
    * Handlebars template would look like this:
    *
       {{#each providers}}
-        <a href="/auth/{{slug}}" role="button">{{name}}</a>
+        <a href='/auth/{{slug}}' role='button'>{{name}}</a>
       {{/each}}
    *
    * @param {Object} req
@@ -82,11 +82,11 @@ var AuthController = {
    *
    * Just like the login form, the registration form is just simple HTML:
    *
-      <form role="form" action="/auth/local/register" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="text" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Sign up</button>
+      <form role='form' action='/auth/local/register' method='post'>
+        <input type='text' name='username' placeholder='Username'>
+        <input type='text' name='email' placeholder='Email'>
+        <input type='password' name='password' placeholder='Password'>
+        <button type='submit'>Sign up</button>
       </form>
    *
    * @param {Object} req
@@ -125,6 +125,21 @@ var AuthController = {
    * @param {Object} res
    */
   callback: function (req, res) {
+    function getStatusCode(error) {
+      switch(error) {
+        case 'Error.Passport.Password.Invalid': return 400;
+        case 'Error.Passport.Password.Wrong': return 401;
+        case 'Error.Passport.Password.NotSet': return 400;
+        case 'Error.Passport.Username.NotFound': return 404;
+        case 'Error.Passport.User.Exists': return 400;
+        case 'Error.Passport.Email.NotFound': return 404;
+        case 'Error.Passport.Email.Missing': return 400;
+        case 'Error.Passport.Email.Exists': return 400;
+        case 'Error.Passport.Username.Missing': return 400;
+        case 'Error.Passport.Password.Missing': return 400;
+        case 'Error.Passport.Generic': return 500;
+      }
+    }
     function tryAgain (err) {
       // Only certain error messages are returned via req.flash('error', someError)
       // because we shouldn't expose internal authorization errors to the user.
@@ -152,6 +167,7 @@ var AuthController = {
       switch (action) {
         case 'register':
           if(req.wantsJSON) {
+            res.status(getStatusCode(errorToReturn));
             res.jsonx({success: false, errors: [errorToReturn]});
           }
           else {
@@ -163,6 +179,7 @@ var AuthController = {
           break;
         default:
           if(req.wantsJSON) {
+            res.status(getStatusCode(errorToReturn));
             res.jsonx({success: false, errors: [errorToReturn]});
           }
           else {

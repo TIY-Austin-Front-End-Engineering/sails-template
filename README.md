@@ -13,7 +13,7 @@
 	1. Run `brew install postgresql`
 	2. Then run `ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents`
 	3. Then run `launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist`
-4. Install sails `npm install -g sails forever`
+4. Install sails `npm install -g sails forever grunt-cli`
 5. Create a free account on Heroku. Be sure to pick node.js as your development language.
 	* [Heroku sign up](https://signup.heroku.com/dc)
 6. Go to [this link](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up)
@@ -25,7 +25,7 @@
 
 1. Create a postgres database for your new application: `createdb appdb`
 2. Create a postgres user for your new application: `createuser postgres`
-3. Fork and then clone my [sails-template](https://github.com/TIY-Austin-Front-End-Engineering/sails-template) from GitHub.
+3. Fork and then clone this repo from GitHub.
 4. Run `npm install` to install the back-end dependencies.
 5. Run `bower install` to install the front-end dependencies. 
 6. To run your sails server type `forever -w start app.js`. This will restart the server any time there is a change to one of the server files.
