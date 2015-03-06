@@ -76,11 +76,16 @@ Parameters:
  - email: string, required (must be a valid email address)
  - password: string, required (length greater than or equal to 8 characters)
 
-Returns an object with the following properties:
+Returns an object with the following properties on success:
 
- - success: boolean - true if the user was successfully registered, else false.
- - errors: array - a list of error codes (if any) that were encountered.
+ - redirect: string - the path where the user would be redirected had they logged in via a regular form.
  - user: object - contains the newly registered user if registration was successfull.
+
+Returns an object with the following properties on failure:
+
+ - error: string - the error code that caused the failure.
+ - status: integer - the HTTP status code.
+ - summary: string - a message describing the error.
 
 *Will return an error if the user is logged in. Only logged out users can register.*
 
@@ -97,11 +102,16 @@ Parameters:
  - identifier: string, required
  - password: string, required
 
-Returns an object with the following properties:
+Returns an object with the following properties on success:
 
- - success: boolean - true if the user was successfully logged in, else false.
- - errors: array - a list of error codes (if any) that were encountered.
+ - redirect: string - the path where the user would be redirected had they logged in via a regular form.
  - user: object - contains the newly registered user if registration was successfull.
+
+Returns an object with the following properties on failure:
+
+ - error: string - the error code that caused the failure.
+ - status: integer - the HTTP status code.
+ - summary: string - a message describing the error.
 
 - - - 
 
@@ -113,7 +123,19 @@ Method: GET
 
 Parameters: *none*
 
-Returns an object with the properties of the currently logged in user, or an empty object with a 404 status code if there is no logged in user.
+Returns an object with the following properties if the user is logged in:
+	
+ - username: string - The currently logged in user's username.
+ - email: string - The currently logged in user's email.
+ - id: integer - The currently logged in user's id.
+ - createdAt: datetime - The date and time the user was created.
+ - updatedAt: datetime - The date and time the user was last updated.
+
+Returns an object with the following properties if the user is not logged in:
+
+ - error: string - the error code that caused the failure.
+ - status: integer - the HTTP status code.
+ - summary: string - a message describing the error.
 
 - - - 
 
@@ -128,4 +150,9 @@ Parameters: *none*
 Returns an object with the following properties:
 
  - success: boolean - true if the user was successfully logged out, else false.
- - errors: array - a list of error codes (if any) that were encountered.
+
+Returns an object with the following properties if an error is encountered:
+
+ - error: string - the error code that caused the failure.
+ - status: integer - the HTTP status code.
+ - summary: string - a message describing the error.

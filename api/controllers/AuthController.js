@@ -70,7 +70,7 @@ var AuthController = {
   logout: function (req, res) {
     req.logout();
     if(req.wantsJSON) {
-      res.jsonx({success: true, errors: []});
+      res.jsonx({success: true});
     }
     else {
       res.redirect('/');
@@ -120,7 +120,11 @@ var AuthController = {
     }
     else {
       res.status(404);
-      res.jsonx({});
+      res.jsonx({
+        "error": "E_NOTFOUND",
+        "status": 404,
+        "summary": "No user is logged in."
+      });
     }
   },
 
@@ -183,8 +187,13 @@ var AuthController = {
       switch (action) {
         case 'register':
           if(req.wantsJSON) {
-            res.status(getStatusCode(errorToReturn));
-            res.jsonx({success: false, errors: [errorToReturn]});
+            var status = getStatusCode(errorToReturn);
+            res.status(status);
+            res.jsonx({
+              "error": errorToReturn,
+              "status": status,
+              "summary": locale.get(errorToReturn, req.getLocale())
+            });
           }
           else {
             res.redirect('/register');
@@ -195,8 +204,13 @@ var AuthController = {
           break;
         default:
           if(req.wantsJSON) {
-            res.status(getStatusCode(errorToReturn));
-            res.jsonx({success: false, errors: [errorToReturn]});
+            var status = getStatusCode(errorToReturn);
+            res.status(status);
+            res.jsonx({
+              "error": errorToReturn,
+              "status": status,
+              "summary": locale.get(errorToReturn, req.getLocale())
+            });
           }
           else {
             res.redirect('/login');
@@ -217,7 +231,7 @@ var AuthController = {
         // Upon successful login, send the user to the homepage were req.user
         // will available.
         if(req.wantsJSON) {
-          res.jsonx({success: true, errors: [], redirect: '/', user: user});
+          res.jsonx({redirect: '/', user: user});
         }
         else {
           res.redirect('/');
