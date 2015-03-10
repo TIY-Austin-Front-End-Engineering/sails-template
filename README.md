@@ -60,6 +60,10 @@
 1. Run `foerver stopall`.
 2. Type `ctrl+c` to quit out of any running logs.
 
+## Adding API Models
+
+The sails command line tool allows you to generate some basic code for models and controllers. To create a new API Model run the command `sails generate api Example`  an Example Model
+
 ## Authentication API
 
 Built into this template is user authentication. Below are the api endpoints that are available to you:
