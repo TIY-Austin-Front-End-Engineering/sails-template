@@ -68,12 +68,15 @@ The sails command line tool allows you to generate some basic code for models an
 
 This branch adds the ability to do file uploads to Amazon S3 and takes advantage of Sails' skipper module. It uses ng-file-upload on the front-end. Before this will work fo you you will need to...
 
-1. Sign up for an [Amazon Web Services](http://aws.amazon.com/) account.
-2. [Create an s3 bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) to store your files.
-3. Generate an [Access Key ID and Secret Access Key](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html).
-4. Determine your s3 region. To do this [go to your s3 console](https://console.aws.amazon.com/s3/home). Look in the address bar of your browser. It should say something like `https://console.aws.amazon.com/s3/home?region=...`. Your region should show up instead of the ...
-5. Fill in your unique access key id, secret access key, bucket, and region in the config/s3.js file.
-6. Change your bucket policy to make files public...
+1. Run `npm install`
+2. Run `bower install`
+3. Rename `assets/bower_components/ng-file-upload/angular-file-upload.js` to `assets/bower_components/ng-file-upload/ng-file-upload.js` so that it loads in the correct order.
+4. Sign up for an [Amazon Web Services](http://aws.amazon.com/) account.
+5. [Create an s3 bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) to store your files.
+6. Generate an [Access Key ID and Secret Access Key](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html).
+7. Determine your s3 region. To do this [go to your s3 console](https://console.aws.amazon.com/s3/home). Look in the address bar of your browser. It should say something like `https://console.aws.amazon.com/s3/home?region=...`. Your region should show up instead of the ...
+8. Fill in your unique access key id, secret access key, bucket, and region in the config/s3.js file.
+9. Change your bucket policy to make files public...
 
 By default all files that you upload to your s3 bucket will be private. To change them to be public by default you'll want to add the below policy to your bucket. Instructions on how to add a policy [can be found here](http://docs.aws.amazon.com/AmazonS3/latest/UG/EditingBucketPermissions.html).
 
