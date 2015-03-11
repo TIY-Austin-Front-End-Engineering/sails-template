@@ -19,9 +19,9 @@ module.exports = {
 			if(err) {
 				res.status(500);
 				res.jsonx({
-					"error": "E_NOTFOUND",
-					"status": 404,
-					"summary": "No user is logged in."
+					"error": "E_UPLOAD",
+					"status": 500,
+					"summary": "There was a problem uploading the file."
 				});
 			}
 			
