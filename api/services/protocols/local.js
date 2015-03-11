@@ -25,7 +25,13 @@ var validator = require('validator');
 exports.register = function (req, res, next) {
   var email    = req.param('email')
     , username = req.param('username')
-    , password = req.param('password');
+    , password = req.param('password')
+    , firstName = req.param('firstName')
+    , lastName = req.param('lastName')
+    , address = req.param('address')
+    , city = req.param('city')
+    , state = req.param('state')
+    , zip = req.param('zip');
 
   if (!email) {
     req.flash('error', 'Error.Passport.Email.Missing');
@@ -42,15 +48,67 @@ exports.register = function (req, res, next) {
     return next(new Error('No password was entered.'));
   }
 
+  // Additional validation on your username can go here
+  // npm install --save validator and then var validator = require('validator') to 
+  // make the validator library accessible in this file.
+  if (!firstName) {
+    req.flash('error', 'Error.Passport.FirstName.Invalid');
+    return next(new Error('No first name was entered.'));
+  }
+
+  if (!lastName) {
+    req.flash('error', 'Error.Passport.LastName.Invalid');
+    return next(new Error('No last name was entered.'));
+  }
+
+  if (!address) {
+    req.flash('error', 'Error.Passport.Address.Invalid');
+    return next(new Error('No address was entered.'));
+  }
+
+  if (!city) {
+    req.flash('error', 'Error.Passport.City.Invalid');
+    return next(new Error('No city was entered.'));
+  }
+
+  if (!state) {
+    req.flash('error', 'Error.Passport.State.Invalid');
+    return next(new Error('No state was entered.'));
+  }
+
+  if (!zip) {
+    req.flash('error', 'Error.Passport.Zip.Invalid');
+    return next(new Error('No zip was entered.'));
+  }
+
   User.create({
     username : username
   , email    : email
+  , firstName    : firstName
+  , lastName    : lastName
+  , address    : address
+  , city    : city
+  , state    : state
+  , zip    : zip
   }, function (err, user) {
     if (err) {
       if (err.code === 'E_VALIDATION') {
         if (err.invalidAttributes.email) {
           req.flash('error', 'Error.Passport.Email.Exists');
+        } else if(err.invalidAttributes.firstName) {
+          req.flash('error', 'Error.Passport.FirstName.Invalid');
+        } else if(err.invalidAttributes.firstName) {
+          req.flash('error', 'Error.Passport.LastName.Invalid');
+        } else if(err.invalidAttributes.firstName) {
+          req.flash('error', 'Error.Passport.Address.Invalid');
+        } else if(err.invalidAttributes.firstName) {
+          req.flash('error', 'Error.Passport.City.Invalid');
+        } else if(err.invalidAttributes.firstName) {
+          req.flash('error', 'Error.Passport.State.Invalid');
+        } else if(err.invalidAttributes.firstName) {
+          req.flash('error', 'Error.Passport.Zip.Invalid');
         } else {
+          console.log(err);
           req.flash('error', 'Error.Passport.User.Exists');
         }
       }
