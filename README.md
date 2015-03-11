@@ -64,6 +64,60 @@
 
 The sails command line tool allows you to generate some basic code for models and controllers. To create a new API Model run the command `sails generate api Example`  an Example Model
 
+## File Upload
+
+This branch adds the ability to do file uploads to Amazon S3 and takes advantage of Sails' skipper module. It uses ng-file-upload on the front-end. Before this will work fo you you will need to...
+
+1. Sign up for an [Amazon Web Services](http://aws.amazon.com/) account.
+2. [Create an s3 bucket](http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html) to store your files.
+3. Generate an [Access Key ID and Secret Access Key](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html).
+4. Determine your s3 region. To do this [go to your s3 console](https://console.aws.amazon.com/s3/home). Look in the address bar of your browser. It should say something like `https://console.aws.amazon.com/s3/home?region=...`. Your region should show up instead of the ...
+5. Fill in your unique access key id, secret access key, bucket, and region in the config/s3.js file.
+6. Change your bucket policy to make files public...
+
+By default all files that you upload to your s3 bucket will be private. To change them to be public by default you'll want to add the below policy to your bucket. Instructions on how to add a policy [can be found here](http://docs.aws.amazon.com/AmazonS3/latest/UG/EditingBucketPermissions.html).
+
+```js
+{
+	"Version": "2008-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowPublicRead",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "*"
+			},
+			"Action": "s3:GetObject",
+			"Resource": "arn:aws:s3:::tiyfe/*"
+		}
+	]
+}
+```
+
+See assets/js/app/controllers.js for an example of how to save a file. The response is an array of objects, which includes the URL where the uploaded file can be accessed in the future. An example response might look like:
+
+```js
+[
+	{
+		"fd": "ed5d2ed2-70c9-47ec-916f-98355adeb829.png",
+		"size": 40278,
+		"type": "image/png",
+		"filename": "breadcrumbs.png",
+		"status": "bufferingOrWriting",
+		"field": "file",
+		"extra": {
+			"Location": "https://tiyfe.s3-us-west-2.amazonaws.com/ed5d2ed2-70c9-47ec-916f-98355adeb829.png",
+			"Bucket": "tiyfe",
+			"Key": "ed5d2ed2-70c9-47ec-916f-98355adeb829.png",
+			"ETag": "\"4fc57fd5f9228a7f89728288dd02f074-1\"",
+			"size": 40278
+		}
+	}
+]
+```
+
+
+
 ## Authentication API
 
 Built into this template is user authentication. Below are the api endpoints that are available to you:
